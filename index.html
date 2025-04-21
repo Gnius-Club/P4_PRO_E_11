@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playbook - Robot Héroe Avanzado - Sesión 11: ¡Puesta a Punto Final!</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; color: #333; line-height: 1.6; }
+        .container { max-width: 1000px; margin: auto; padding: 20px; }
+        .header { background-color: #ffa500; color: white; text-align: center; padding: 10px; } /* Orange Accent */
+        .activity { margin-bottom: 20px; }
+        .banner {
+            background-color: #ffa500; /* Orange Accent */
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            font-weight: bold;
+            /* Added Flexbox for side-by-side layout */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        /* Use details/summary for accordions */
+        details > summary {
+            list-style: none; /* Remove default triangle */
+        }
+        details > summary::-webkit-details-marker {
+            display: none; /* Remove default triangle for Chrome/Safari */
+        }
+        details > summary::marker {
+             display: none; /* Remove default triangle for Firefox */
+        }
+        /* Custom marker logic (optional) */
+        /*
+         details > summary:before {
+            content: '▶ ';
+            margin-right: 5px;
+         }
+         details[open] > summary:before {
+            content: '▼ ';
+         }
+        */
+        .content { display: block; padding: 10px; border: 1px solid #ddd; margin-top: -10px; margin-bottom: 10px; border-top: none;} /* Ensure content is visible by default */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+            vertical-align: top;
+        }
+        span[style*="color: red;"] { /* Keep red span for emphasis */
+            font-weight: bold;
+        }
+         ul, ol {
+            margin-top: 0;
+            margin-bottom: 10px;
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+        .time-title { margin-bottom: 20px; text-align: center; font-size: 1.2em; color: #555;}
+        /* Style for Kanban icons */
+        .kanban-icon { font-size: 1.2em; margin: 0 2px; }
+        .kanban-todo { color: #f0ad4e; } /* Yellow/Orange for To Do */
+        .kanban-doing { color: #5bc0de; } /* Blue for Doing */
+        .kanban-test { color: #d9534f; } /* Red for Test */
+        .kanban-done { color: #5cb85c; } /* Green for Done */
+
+        /* Span styles for title and time in banner */
+        .activity-title {
+            flex-grow: 1; /* Allows title to take available space */
+            padding-right: 10px; /* Add some space between title and time */
+        }
+        .activity-time {
+            white-space: nowrap; /* Prevents time from wrapping */
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Playbook - Robot Héroe Avanzado - Sesión 11: ¡Puesta a Punto Final! – Optimizando al Héroe Avanzado</h1>
+    </div>
+    <div class="container">
+        <h2 class="time-title">Tiempo efectivo de clase: 40 minutos</h2>
+
+        <!-- Resumen de Sesión -->
+        <details id="activity-0" class="activity">
+            <summary class="banner">
+                <span class="activity-title">📝 Resumen de Sesión</span>
+                <span class="activity-time"></span>
+            </summary>
+            <div class="content">
+                <table>
+                    <tr>
+                        <td style="width: 50%; padding: 10px; border-right: 1px solid #ddd;">
+                            <strong>🎯 Objetivo de la Sesión:</strong>
+                            <ul>
+                                <li>Integrar cualquier trabajo pendiente de la Sesión 10 (refinamiento o nueva feature).</li>
+                                <li>Realizar debugging final intensivo.</li>
+                                <li>Optimizar el rendimiento general del robot.</li>
+                                <li>Asegurar la robustez del prototipo avanzado listo para la entrega final.</li>
+                            </ul>
+                            <strong>⏱️ Duración Estimada:</strong> 40 minutos.
+                        </td>
+                        <td style="width: 50%; padding: 10px;">
+                            <strong>🔑 Entregable Clave:</strong>
+                            <ul>
+                                <li>Prototipo avanzado funcional, estable y optimizado.</li>
+                                <li>Código final depurado y comentado (si aplica).</li>
+                                <li>Pruebas de regresión completas y pruebas de estrés realizadas.</li>
+                                <li>Robot físicamente pulido (cables, limpieza, baterías cargadas).</li>
+                                <li>Últimas tareas clave movidas a "¡Listo!" (✅) en el Kanban.</li>
+                            </ul>
+                            <strong>🛠️ Materiales Específicos:</strong>
+                             <ul>
+                                <li>Proyector o pantalla interactiva.</li>
+                                <li>Presentación de diapositivas (Diapositivas 1-5 propuestas).</li>
+                                <li>Tableros Kanban de cada equipo (actualizados de S10).</li>
+                                <li>Prototipos avanzados casi listos.</li>
+                                <li>Computadoras con software de programación y código casi final.</li>
+                                <li>Entorno de prueba completo para pruebas de regresión y estrés.</li>
+                                <li>Baterías cargadas, herramientas para ajustes físicos (si aplica).</li>
+                             </ul>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </details>
+
+        <!-- Desarrollo de la Sesión -->
+
+        <!-- Actividad 1: ¡Stand-up de Cierre Técnico! -->
+        <details id="activity-1" class="activity">
+            <summary class="banner">
+                 <span class="activity-title">🏁 Actividad 1: ¡Stand-up de Cierre Técnico!</span>
+                 <span class="activity-time">⏰ Tiempo: 5 minutos</span>
+            </summary>
+            <div class="content">
+                <table>
+                    <tr>
+                        <th style="width: 50%;">Acción</th>
+                        <th style="width: 50%;">Diálogo del Maestro</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Paso 1 (1 min):</strong> Iniciar la sesión enfocada en la preparación final para la entrega.
+                            <br><em>(<strong>Proyectar Diapositiva 1:</strong> Título Sesión 11 (Avanzado) + Objetivo: "¡Puesta a Punto Final! Objetivo: Integrar, debug final, optimizar y asegurar robustez para entrega").</em>
+                        </td>
+                        <td>
+                            "¡Equipos, Sesión 11! ¡La penúltima parada antes de la entrega final! Hoy es la 'Puesta a Punto Final'. Nos aseguraremos de que todo esté integrado, depurado, optimizado y robusto. ¡Dejaremos a nuestro Héroe Avanzado brillante y listo!"
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Paso 2 (3 min):</strong> Stand-up rápido para revisar tareas pendientes y priorizar lo esencial para cumplir con "avanzado".
+                            <br><em>(<strong>Proyectar Diapositiva 2:</strong> Stand-up Cierre Técnico - Kanban view. Foco: Priorizar lo ESENCIAL para "Avanzado". Pregunta: ¿Qué es lo absolutamente crítico por terminar/pulir HOY?).</em>
+                            <br>El equipo revisa el Kanban (⚙️ Haciendo, 💡 Por Hacer) y define las prioridades absolutas.
+                        </td>
+                        <td>
+                            "Empezamos con un 'Stand-up de Cierre Técnico'. Miren su Kanban, especialmente las tareas que quedaron en <strong class='kanban-icon kanban-doing'>⚙️ Haciendo</strong> o <strong class='kanban-icon kanban-todo'>💡 Por Hacer</strong> desde la sesión pasada."
+                            <br><br>
+                            "Considerando que la próxima sesión es la entrega final, la pregunta clave es: <strong>¿Qué es lo ABSOLUTAMENTE ESENCIAL que debemos terminar o pulir HOY para que nuestro prototipo cumpla con los requisitos de 'Avanzado'</strong> (definidos en S1)?"
+                            <br><br>
+                            "Quizás sea terminar esa nueva feature, o corregir ese bug molesto del núcleo, o asegurar que la función principal sea 100% estable."
+                            <br><br>
+                            "Discutan y definan sus 1-2 prioridades MÁXIMAS para esta sesión." <em>(Moderar la priorización).</em>
+                        </td>
+                    </tr>
+                     <tr>
+                        <td>
+                            <strong>Paso 3 (1 min):</strong> Confirmar prioridades y preparar el trabajo final.
+                        </td>
+                        <td>
+                            "¡Prioridades definidas! Sabemos en qué enfocarnos. ¡Es el último sprint de desarrollo y optimización!"
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </details>
+
+        <!-- Actividad 2: ¡Optimización y Pruebas Finales Exhaustivas! -->
+        <details id="activity-2" class="activity">
+            <summary class="banner">
+                 <span class="activity-title">✨ Actividad 2: ¡Optimización y Pruebas Finales Exhaustivas!</span>
+                 <span class="activity-time">⏰ Tiempo: 30 minutos</span>
+            </summary>
+            <div class="content">
+                <table>
+                    <tr>
+                        <th style="width: 50%;">Acción</th>
+                        <th style="width: 50%;">Diálogo del Maestro</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Paso 1 (3 min):</strong> Detallar las tareas finales de cada rol.
+                            <br><em>(<strong>Proyectar Diapositiva 3:</strong> Optimización y Pruebas Finales - Roles: Ing. 💻 (Debug final, Optimización menor si posible s/introducir bugs, Comentarios código si se requiere), Tester 🧪 (Pruebas Regresión COMPLETAS, Stress Test - ej: dejarlo funcionando un rato), Arq. T. 📐 (Supervisión pruebas finales, Pulido físico final - cables, baterías, limpieza)).</em>
+                        </td>
+                        <td>
+                            "¡Manos a la obra en esta fase final de 'Optimización y Pruebas Exhaustivas'! Las misiones de los roles son críticas:"
+                            <br><br>
+                            "▶️ <strong>Ingeniero/a (💻):</strong> ¡Caza final de bugs! Realiza la <span style='color: red;'>depuración final</span> de las tareas prioritarias. Si es posible y no introduce nuevos riesgos, realiza alguna <span style='color: red;'>optimización menor</span> en el código. Considera añadir comentarios al código si es necesario para la entrega."
+                            <br>
+                            "▶️ <strong>Tester (🧪):</strong> ¡Pruebas definitivas! Ejecuta un conjunto <span style='color: red;'>COMPLETO de pruebas de regresión</span> (probando TODO lo implementado) para asegurar que nada se haya roto con los últimos cambios. Realiza una <span style='color: red;'>prueba de estrés</span> (ej: dejar el robot funcionando durante varios minutos seguidos) para verificar la robustez."
+                            <br>
+                            "▶️ <strong>Arquitecto/a T. (📐):</strong> ¡Supervisor de calidad total! Supervisa las pruebas finales. Realiza el <span style='color: red;'>pulido físico final</span>: asegura que los cables estén ordenados y seguros, las baterías completamente cargadas, y el robot limpio y presentable."
+                            <br><br>
+                            "¡El objetivo es un robot estable, funcional y pulido!"
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Paso 2 (25 min):</strong> Facilitar el trabajo intensivo de debugging, pruebas y pulido.
+                            <br>Circular activamente, apoyando en la resolución de los últimos bugs.
+                            <br>Observar las pruebas de regresión y estrés, ayudando a interpretar resultados.
+                            <br>Asegurarse de que se realizan los preparativos físicos finales.
+                            <br>Mantener el foco en las prioridades definidas para la entrega.
+                        </td>
+                        <td>
+                            "¡Adelante con esta puesta a punto final! Tienen 25 minutos."
+                            <br><br>
+                            <em>(Mientras circulas):</em>
+                            "Ingeniero/a, ¿cómo va la caza de ese último bug? ¿Necesitas otra perspectiva?"
+                            "Tester, ¿qué resultados estás viendo en las pruebas de regresión? ¿Se ha roto algo inesperado?"
+                            "¿Cómo está resistiendo el robot la prueba de estrés?"
+                            "Arquitecto/a T., ¿cables asegurados? ¿Baterías a tope?"
+                            "¡Recuerden las prioridades! Aseguremos lo esencial para que sea 'Avanzado'."
+                            "¡Último esfuerzo para que el Héroe brille!"
+                        </td>
+                    </tr>
+                     <tr>
+                        <td>
+                            <strong>Paso 3 (2 min):</strong> Guiar el Kanban Flow final para las últimas tareas.
+                            <br><em>(<strong>Proyectar Diapositiva 4:</strong> Kanban Flow Final (Tareas Clave) - Flecha grande apuntando a la columna "¡Listo!" ✅. Texto: "Mover últimas tareas clave (debugging, pruebas finales, pulido) a ¡Listo!").</em>
+                        </td>
+                        <td>
+                            "¡Atención, equipos! A medida que completen esas últimas tareas cruciales de debugging, pruebas finales y pulido físico..."
+                            <br><br>
+                            "¡Asegúrense de mover las tarjetas correspondientes a <strong class='kanban-icon kanban-done'>✅ ¡Listo!</strong> en su Kanban!"
+                            <br><br>
+                            "Queremos que el tablero refleje que el robot está completamente preparado."
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </details>
+
+        <!-- Actividad 3: ¡Preparados para la Entrega Final! -->
+        <details id="activity-3" class="activity">
+            <summary class="banner">
+                 <span class="activity-title">📦 Actividad 3: ¡Preparados para la Entrega Final!</span>
+                 <span class="activity-time">⏰ Tiempo: 5 minutos</span>
+            </summary>
+            <div class="content">
+                <table>
+                     <tr>
+                        <th style="width: 50%;">Acción</th>
+                        <th style="width: 50%;">Diálogo del Maestro</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Paso 1 (3 min):</strong> Realizar un chequeo final del prototipo completo por todo el equipo.
+                            <br><em>(<strong>Proyectar Diapositiva 5:</strong> Preparados para Entrega Final - Checklist visual simple: ¿Funcionalidad Clave OK? ¿Estable/Robusto? ¿Físicamente OK? ¿Cumple requisitos "Avanzado" S1? Pregunta: ¿Está listo?).</em>
+                            <br>El equipo realiza una última revisión conjunta.
+                        </td>
+                        <td>
+                            "¡Momento de la verdad final antes de la entrega! Reúnanse todo el equipo alrededor de su Héroe Avanzado."
+                            <br><br>
+                            "Hagan un chequeo final juntos:"
+                            <br>
+                            "- ¿La funcionalidad clave que definieron como 'Avanzado' funciona correctamente?"
+                            <br>
+                            "- ¿El robot se siente estable y robusto después de las pruebas?"
+                            <br>
+                            "- ¿Está físicamente listo (cargado, limpio, ordenado)?"
+                            <br>
+                            "- ¿Cumple con los requisitos generales que establecimos en la Sesión 1 para un prototipo 'Avanzado'?"
+                            <br><br>
+                            "Respondan como equipo: <strong>¿Está listo?</strong>" <em>(Esperar confirmación del equipo).</em>
+                        </td>
+                    </tr>
+                     <tr>
+                        <td>
+                            <strong>Paso 2 (2 min):</strong> Cierre de la sesión y anticipación de S12 (Entrega Final).
+                        </td>
+                        <td>
+                            "¡Increíble trabajo en esta puesta a punto final! Han pulido, probado y asegurado la robustez de sus creaciones."
+                            <br><br>
+                            "Con esto, hemos completado todo el ciclo de desarrollo. ¡Su Robot Héroe Avanzado está listo (o lo más listo posible) para su misión final!"
+                            <br><br>
+                            "La próxima sesión, la Sesión 12, será la '¡Entrega del Prototipo Avanzado! – Misión Maestra Cumplida'. Realizaremos la verificación final formal y prepararemos todo para la entrega oficial al profesor. No habrá presentación en clase, ¡solo la entrega final del trabajo!"
+                            <br><br>
+                            "¡Guarden sus robots con extremo cuidado! ¡Nos vemos para la entrega!"
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </details>
+
+    </div> <!-- Fin del container -->
+</body>
+</html>
