@@ -14,34 +14,24 @@
             color: white;
             padding: 10px;
             cursor: pointer;
-            margin-bottom: 10px;
+            margin-bottom: 10px; /* Adjusted for spacing */
             font-weight: bold;
-            /* Added Flexbox for side-by-side layout */
-            display: flex;
+            list-style: none;
+            display: flex; /* For side-by-side title and time */
             justify-content: space-between;
             align-items: center;
+            border-radius: 5px; /* Rounded corners for banner */
         }
-        /* Use details/summary for accordions */
-        details > summary {
-            list-style: none; /* Remove default triangle */
+        .content { 
+            display: none; 
+            padding: 15px; 
+            border: 1px solid #ddd; 
+            margin-bottom: 10px; 
+            border-radius: 5px; /* Rounded corners for content */
+            margin-top: -10px; /* Visual connection with banner */
+            padding-top: 20px; /* Avoid text clash */
+            background-color: #fff; /* Ensure content background is white or default */
         }
-        details > summary::-webkit-details-marker {
-            display: none; /* Remove default triangle for Chrome/Safari */
-        }
-        details > summary::marker {
-             display: none; /* Remove default triangle for Firefox */
-        }
-        /* Custom marker logic (optional) */
-        /*
-         details > summary:before {
-            content: '▶ ';
-            margin-right: 5px;
-         }
-         details[open] > summary:before {
-            content: '▼ ';
-         }
-        */
-        .content { display: block; padding: 10px; border: 1px solid #ddd; margin-top: -10px; margin-bottom: 10px; border-top: none;} /* Ensure content is visible by default */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -52,7 +42,7 @@
             text-align: left;
             vertical-align: top;
         }
-        span[style*="color: red;"] { /* Keep red span for emphasis */
+        span[style*="color: red;"] { 
             font-weight: bold;
         }
          ul, ol {
@@ -71,15 +61,49 @@
         .kanban-test { color: #d9534f; } /* Red for Test */
         .kanban-done { color: #5cb85c; } /* Green for Done */
 
-        /* Span styles for title and time in banner */
+        /* Making facilitator instructions clearer */
+        td em, td i { /* Style for italicized facilitator notes */
+            color: #555;
+            font-style: italic;
+            display: block; /* Put notes on new lines */
+            margin-top: 5px;
+        }
+        /* Ensure step <strong> tags render bold */
+        td strong { font-weight: bold; } /* General strong for keywords */
+        td > strong { display: block; margin-bottom: 5px; } /* For step headers */
+
         .activity-title {
-            flex-grow: 1; /* Allows title to take available space */
-            padding-right: 10px; /* Add some space between title and time */
+            flex-grow: 1; 
+            padding-right: 10px; 
         }
         .activity-time {
-            white-space: nowrap; /* Prevents time from wrapping */
+            white-space: nowrap; 
         }
     </style>
+    <script>
+        function toggleContent(id) {
+            const content = document.getElementById(id);
+            if (content) {
+                if (content.style.display === "none" || content.style.display === "") {
+                    content.style.display = "block";
+                } else {
+                    content.style.display = "none";
+                }
+            }
+        }
+
+        window.onload = () => {
+            const contents = document.querySelectorAll('.content');
+            contents.forEach(content => {
+                content.style.display = 'none';
+            });
+            // Open "Resumen de Sesión" by default
+            const resumenContent = document.getElementById('activity_0_content');
+            if (resumenContent) {
+                resumenContent.style.display = 'block';
+            }
+        };
+    </script>
 </head>
 <body>
     <div class="header">
@@ -89,12 +113,12 @@
         <h2 class="time-title">Tiempo efectivo de clase: 40 minutos</h2>
 
         <!-- Resumen de Sesión -->
-        <details id="activity-0" class="activity">
-            <summary class="banner">
+        <div id="activity-0" class="activity">
+            <div class="banner" onclick="toggleContent('activity_0_content')">
                 <span class="activity-title">📝 Resumen de Sesión</span>
                 <span class="activity-time"></span>
-            </summary>
-            <div class="content">
+            </div>
+            <div id="activity_0_content" class="content" style="display: block;">
                 <table>
                     <tr>
                         <td style="width: 50%; padding: 10px; border-right: 1px solid #ddd;">
@@ -130,17 +154,17 @@
                     </tr>
                 </table>
             </div>
-        </details>
+        </div>
 
         <!-- Desarrollo de la Sesión -->
 
         <!-- Actividad 1: ¡Stand-up de Cierre Técnico! -->
-        <details id="activity-1" class="activity">
-            <summary class="banner">
+        <div id="activity-1" class="activity">
+            <div class="banner" onclick="toggleContent('activity_1_content')">
                  <span class="activity-title">🏁 Actividad 1: ¡Stand-up de Cierre Técnico!</span>
                  <span class="activity-time">⏰ Tiempo: 5 minutos</span>
-            </summary>
-            <div class="content">
+            </div>
+            <div id="activity_1_content" class="content">
                 <table>
                     <tr>
                         <th style="width: 50%;">Acción</th>
@@ -148,18 +172,24 @@
                     </tr>
                     <tr>
                         <td>
-                            <strong>Paso 1 (1 min):</strong> Iniciar la sesión enfocada en la preparación final para la entrega.
-                            <br><em>(<strong>Proyectar Diapositiva 1:</strong> Título Sesión 11 (Avanzado) + Objetivo: "¡Puesta a Punto Final! Objetivo: Integrar, debug final, optimizar y asegurar robustez para entrega").</em>
+                            <strong>Paso 1 (1 min):</strong>
+                            <ul>
+                                <li>Iniciar la sesión enfocada en la preparación final para la entrega.</li>
+                                <li><strong>Proyectar Diapositiva 1</strong>.</li>
+                            </ul>
                         </td>
                         <td>
-                            "¡Equipos, Sesión 11! ¡La penúltima parada antes de la entrega final! Hoy es la 'Puesta a Punto Final'. Nos aseguraremos de que todo esté integrado, depurado, optimizado y robusto. ¡Dejaremos a nuestro Héroe Avanzado brillante y listo!"
+                            "¡Equipos Pro, estamos muy cerca de la meta! Hoy es la sesión de Verificación Final Pro. Vamos a asegurarnos de que nuestro Prototipo Avanzado no solo funcione, sino que brille ✨. ¡Es hora de pulir píxeles y código!"
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <strong>Paso 2 (3 min):</strong> Stand-up rápido para revisar tareas pendientes y priorizar lo esencial para cumplir con "avanzado".
-                            <br><em>(<strong>Proyectar Diapositiva 2:</strong> Stand-up Cierre Técnico - Kanban view. Foco: Priorizar lo ESENCIAL para "Avanzado". Pregunta: ¿Qué es lo absolutamente crítico por terminar/pulir HOY?).</em>
-                            <br>El equipo revisa el Kanban (⚙️ Haciendo, 💡 Por Hacer) y define las prioridades absolutas.
+                            <strong>Paso 2 (3 min):</strong>
+                            <ul>
+                                <li>Stand-up rápido para revisar tareas pendientes y priorizar lo esencial para cumplir con "avanzado".</li>
+                                <li><strong>Proyectar Diapositiva 2</strong>.</li>
+                                <li>El equipo revisa el Kanban y define las prioridades absolutas.</li>
+                            </ul>
                         </td>
                         <td>
                             "Empezamos con un 'Stand-up de Cierre Técnico'. Miren su Kanban, especialmente las tareas que quedaron en <strong class='kanban-icon kanban-doing'>⚙️ Haciendo</strong> o <strong class='kanban-icon kanban-todo'>💡 Por Hacer</strong> desde la sesión pasada."
@@ -173,7 +203,10 @@
                     </tr>
                      <tr>
                         <td>
-                            <strong>Paso 3 (1 min):</strong> Confirmar prioridades y preparar el trabajo final.
+                            <strong>Paso 3 (1 min):</strong>
+                            <ul>
+                                <li>Confirmar prioridades y preparar el trabajo final.</li>
+                            </ul>
                         </td>
                         <td>
                             "¡Prioridades definidas! Sabemos en qué enfocarnos. ¡Es el último sprint de desarrollo y optimización!"
@@ -181,15 +214,15 @@
                     </tr>
                 </table>
             </div>
-        </details>
+        </div>
 
         <!-- Actividad 2: ¡Optimización y Pruebas Finales Exhaustivas! -->
-        <details id="activity-2" class="activity">
-            <summary class="banner">
+        <div id="activity-2" class="activity">
+            <div class="banner" onclick="toggleContent('activity_2_content')">
                  <span class="activity-title">✨ Actividad 2: ¡Optimización y Pruebas Finales Exhaustivas!</span>
                  <span class="activity-time">⏰ Tiempo: 30 minutos</span>
-            </summary>
-            <div class="content">
+            </div>
+            <div id="activity_2_content" class="content">
                 <table>
                     <tr>
                         <th style="width: 50%;">Acción</th>
@@ -197,8 +230,11 @@
                     </tr>
                     <tr>
                         <td>
-                            <strong>Paso 1 (3 min):</strong> Detallar las tareas finales de cada rol.
-                            <br><em>(<strong>Proyectar Diapositiva 3:</strong> Optimización y Pruebas Finales - Roles: Ing. 💻 (Debug final, Optimización menor si posible s/introducir bugs, Comentarios código si se requiere), Tester 🧪 (Pruebas Regresión COMPLETAS, Stress Test - ej: dejarlo funcionando un rato), Arq. T. 📐 (Supervisión pruebas finales, Pulido físico final - cables, baterías, limpieza)).</em>
+                            <strong>Paso 1 (3 min):</strong>
+                            <ul>
+                                <li>Detallar las tareas finales de cada rol.</li>
+                                <li><strong>Proyectar Diapositiva 3</strong>.</li>
+                            </ul>
                         </td>
                         <td>
                             "¡Manos a la obra en esta fase final de 'Optimización y Pruebas Exhaustivas'! Las misiones de los roles son críticas:"
@@ -214,11 +250,14 @@
                     </tr>
                     <tr>
                         <td>
-                            <strong>Paso 2 (25 min):</strong> Facilitar el trabajo intensivo de debugging, pruebas y pulido.
-                            <br>Circular activamente, apoyando en la resolución de los últimos bugs.
-                            <br>Observar las pruebas de regresión y estrés, ayudando a interpretar resultados.
-                            <br>Asegurarse de que se realizan los preparativos físicos finales.
-                            <br>Mantener el foco en las prioridades definidas para la entrega.
+                            <strong>Paso 2 (25 min):</strong>
+                            <ul>
+                                <li>Facilitar el trabajo intensivo de debugging, pruebas y pulido.</li>
+                                <li>Circular activamente, apoyando en la resolución de los últimos bugs.</li>
+                                <li>Observar las pruebas de regresión y estrés, ayudando a interpretar resultados.</li>
+                                <li>Asegurarse de que se realizan los preparativos físicos finales.</li>
+                                <li>Mantener el foco en las prioridades definidas para la entrega.</li>
+                            </ul>
                         </td>
                         <td>
                             "¡Adelante con esta puesta a punto final! Tienen 25 minutos."
@@ -234,8 +273,11 @@
                     </tr>
                      <tr>
                         <td>
-                            <strong>Paso 3 (2 min):</strong> Guiar el Kanban Flow final para las últimas tareas.
-                            <br><em>(<strong>Proyectar Diapositiva 4:</strong> Kanban Flow Final (Tareas Clave) - Flecha grande apuntando a la columna "¡Listo!" ✅. Texto: "Mover últimas tareas clave (debugging, pruebas finales, pulido) a ¡Listo!").</em>
+                            <strong>Paso 3 (2 min):</strong>
+                            <ul>
+                                <li>Guiar el Kanban Flow final para las últimas tareas.</li>
+                                <li><strong>Proyectar Diapositiva 4</strong>.</li>
+                            </ul>
                         </td>
                         <td>
                             "¡Atención, equipos! A medida que completen esas últimas tareas cruciales de debugging, pruebas finales y pulido físico..."
@@ -247,15 +289,15 @@
                     </tr>
                 </table>
             </div>
-        </details>
+        </div>
 
         <!-- Actividad 3: ¡Preparados para la Entrega Final! -->
-        <details id="activity-3" class="activity">
-            <summary class="banner">
+        <div id="activity-3" class="activity">
+            <div class="banner" onclick="toggleContent('activity_3_content')">
                  <span class="activity-title">📦 Actividad 3: ¡Preparados para la Entrega Final!</span>
                  <span class="activity-time">⏰ Tiempo: 5 minutos</span>
-            </summary>
-            <div class="content">
+            </div>
+            <div id="activity_3_content" class="content">
                 <table>
                      <tr>
                         <th style="width: 50%;">Acción</th>
@@ -263,9 +305,12 @@
                     </tr>
                     <tr>
                         <td>
-                            <strong>Paso 1 (3 min):</strong> Realizar un chequeo final del prototipo completo por todo el equipo.
-                            <br><em>(<strong>Proyectar Diapositiva 5:</strong> Preparados para Entrega Final - Checklist visual simple: ¿Funcionalidad Clave OK? ¿Estable/Robusto? ¿Físicamente OK? ¿Cumple requisitos "Avanzado" S1? Pregunta: ¿Está listo?).</em>
-                            <br>El equipo realiza una última revisión conjunta.
+                            <strong>Paso 1 (3 min):</strong>
+                            <ul>
+                                <li>Realizar un chequeo final del prototipo completo por todo el equipo.</li>
+                                <li><strong>Proyectar Diapositiva 5</strong>.</li>
+                                <li>El equipo realiza una última revisión conjunta.</li>
+                            </ul>
                         </td>
                         <td>
                             "¡Momento de la verdad final antes de la entrega! Reúnanse todo el equipo alrededor de su Héroe Avanzado."
@@ -285,10 +330,13 @@
                     </tr>
                      <tr>
                         <td>
-                            <strong>Paso 2 (2 min):</strong> Cierre de la sesión y anticipación de S12 (Entrega Final).
+                            <strong>Paso 2 (2 min):</strong>
+                            <ul>
+                                <li>Cierre de la sesión y anticipación de S12 (Entrega Final).</li>
+                            </ul>
                         </td>
                         <td>
-                            "¡Increíble trabajo en esta puesta a punto final! Han pulido, probado y asegurado la robustez de sus creaciones."
+                            "¡Excelente trabajo en esta puesta a punto final! Han pulido, probado y asegurado la robustez de sus creaciones."
                             <br><br>
                             "Con esto, hemos completado todo el ciclo de desarrollo. ¡Su Robot Héroe Avanzado está listo (o lo más listo posible) para su misión final!"
                             <br><br>
@@ -299,7 +347,7 @@
                     </tr>
                 </table>
             </div>
-        </details>
+        </div>
 
     </div> <!-- Fin del container -->
 </body>
